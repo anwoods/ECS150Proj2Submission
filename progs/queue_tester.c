@@ -37,10 +37,21 @@ void test_queue_simple(void)
 	TEST_ASSERT(ptr == &data);
 }
 
+void test_queue_destroy_full(void){
+    queue_t q;
+    int data1 = 3;
+    fprintf(stderr, "*** TEST queue_destroy_full ***\n");
+    q = queue_create();
+    queue_enqueue(q, &data1);
+    int res = queue_destroy(q);
+    TEST_ASSERT(res == -1);
+}
+
 int main(void)
 {
 	test_create();
 	test_queue_simple();
+	test_queue_destroy_full();
 
 	return 0;
 }
