@@ -293,6 +293,20 @@ void test_length_queue_null(void){
 	TEST_ASSERT(res == -1);
 }
 
+void test_length_success(void){
+	queue_t q;
+	int data = 1;
+    int data2 = 2;
+    int data3 = 3;
+    fprintf(stderr, "*** TEST test_length_success ***\n");
+    q = queue_create();
+    queue_enqueue(q, &data);
+    queue_enqueue(q, &data2);
+    queue_enqueue(q, &data3);
+	int res = queue_length(q);
+	TEST_ASSERT(res == 3);
+}
+
 
 int main(void)
 {
@@ -319,6 +333,7 @@ int main(void)
 	test_iterator_null_queue();
 	test_iterator_null_func();
 	test_length_queue_null();
+	test_length_success();
 
 	return 0;
 }
