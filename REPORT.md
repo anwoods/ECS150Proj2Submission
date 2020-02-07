@@ -11,10 +11,9 @@ To implement the multithreading, we created a data structure to represent the Th
 //add why queues are good structs to keep threads in?
 Our other global variable kept track of the number of threads, so we could accurately assign each new thread its TID.
 //talk about other funcs?
-//talk about adding func that compares tids of threads?
 
 ### Preempt Design Choices
-//dont think any high level choices were made, mostly just worked from his sources and other documentation about signals and timers
+//dont think any high level choices were made? mostly just worked from his sources and other documentation about signals and timers
 
 -------------------------------------------------------------------------------
 ## Testing Methods Used
