@@ -185,9 +185,3 @@ int uthread_join(uthread_t tid, int *retval)
 	}
 	return -1;
 }
-
-
-
-
-
-
