@@ -153,14 +153,6 @@ void test_delete_data_not_found(void){
     TEST_ASSERT(res == -1);
 }
 
-void test_delete_empty_queue(void){
-	queue_t q;
-	int not_in_queue_data = 4;
-    fprintf(stderr, "*** TEST delete_empty_queue ***\n");
-    q = queue_create();
-    int res = queue_delete(q, &not_in_queue_data);
-    TEST_ASSERT(res == -1);
-}
 
 int main(void)
 {
@@ -178,7 +170,6 @@ int main(void)
 	test_delete_null_queue();
 	test_delete_null_data();
 	test_delete_data_not_found();
-	test_delete_empty_queue();
 
 	return 0;
 }
