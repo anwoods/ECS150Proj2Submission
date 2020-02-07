@@ -1,35 +1,21 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 #include "queue.h"
 
-//node for linked list
+/* node for linked list */
 struct queue_node {
 	struct queue_node * next_node;
 	void * data_item;
 };
 
-//queue implemented using a linked list
+/* queue implemented using a linked list */
 struct queue {
 	struct queue_node * head;
 	struct queue_node * tail;
 	int length;
 };
-
-/*
-static void print_queue(queue_t queue)
-{
-	//temp func for testing
-	struct queue_node * iterator = queue->head;
-	printf("queue length = %d\n", queue->length);
-	while(iterator != NULL){
-		printf("%d\n", *(int*)iterator->data_item);
-		iterator = iterator->next_node;
-	}
-}
-*/
 
 queue_t queue_create(void)
 {
@@ -55,6 +41,7 @@ int queue_destroy(queue_t queue)
 	}
 }
 
+/* function to create and initiate a new node */
 static struct queue_node* node_create(void * data)
 {
 	struct queue_node * new_node = (struct queue_node *)malloc(sizeof(struct queue_node)); //alloc space for new node
@@ -106,7 +93,7 @@ int queue_dequeue(queue_t queue, void **data)
 
 int queue_delete(queue_t queue, void *data)
 {
-	if((queue == NULL) || (data == NULL) || queue->length == 0){
+	if((queue == NULL) || (data == NULL)){
 		return -1;
 	}
 	struct queue_node * iterator = queue->head;	//create node to iterate through queue
