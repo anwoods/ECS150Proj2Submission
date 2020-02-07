@@ -37,6 +37,10 @@ void test_queue_simple(void)
 	TEST_ASSERT(ptr == &data);
 }
 
+/*
+	This tests that you can't destroy a
+	non-empty queue
+*/
 void test_queue_destroy_not_empty(void){
     queue_t q;
     int data1 = 3;
@@ -47,6 +51,9 @@ void test_queue_destroy_not_empty(void){
     TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests destroying an empty queue
+*/
 void test_queue_destroy_empty(void){
     queue_t q;
     fprintf(stderr, "*** TEST queue_destroy_empty ***\n");
@@ -57,6 +64,10 @@ void test_queue_destroy_empty(void){
     TEST_ASSERT(res == 0);
 }
 
+/*
+	This tests that you can't destroy a 
+	null queue
+*/
 void test_queue_destroy_null(void){
     queue_t q;
     fprintf(stderr, "*** TEST queue_destroy_null ***\n");
@@ -66,6 +77,10 @@ void test_queue_destroy_null(void){
     TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests that you can't enqueue to
+	a null queue
+*/
 void test_enqueue_null_queue(void){
 	queue_t q;
 	int data = 3;
@@ -76,6 +91,10 @@ void test_enqueue_null_queue(void){
     TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests that you can't enqueue null
+	data onto a queue
+*/
 void test_enqueue_null_data(void){
 	queue_t q;
     fprintf(stderr, "*** TEST enqueue_null_data ***\n");
@@ -84,6 +103,10 @@ void test_enqueue_null_data(void){
     TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests proper enqeue of data onto
+	a proper queue
+*/
 void test_enqueue_success(void){
     queue_t q;
     fprintf(stderr, "*** TEST enqueue_success ***\n");
@@ -94,6 +117,10 @@ void test_enqueue_success(void){
     TEST_ASSERT(queue_length(q) == 1);
 }
 
+/*
+	This tests that you can't dequeue a 
+	null queue
+*/
 void test_dequeue_null_queue(void){
 	queue_t q;
 	int *ptr;
@@ -103,6 +130,10 @@ void test_dequeue_null_queue(void){
     TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests that you can't dequeue a
+	queue with a null data pointer
+*/
 void test_dequeue_null_data(void){
 	queue_t q;
 	int data = 3;
@@ -113,6 +144,10 @@ void test_dequeue_null_data(void){
     TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests that you can't dequeue an
+	empty queue
+*/
 void test_dequeue_empty_queue(void){
 	queue_t q;
 	int *ptr;
@@ -122,6 +157,10 @@ void test_dequeue_empty_queue(void){
     TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests that you can't delete
+	from a null queue
+*/
 void test_delete_null_queue(void){
 	queue_t q;
 	int data = 3;
@@ -131,6 +170,10 @@ void test_delete_null_queue(void){
     TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests that you can't delete a
+	null value from a queue
+*/
 void test_delete_null_data(void){
 	queue_t q;
 	int data = 3;
@@ -141,6 +184,10 @@ void test_delete_null_data(void){
     TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests that you can't delete a data
+	value that does not exist in the queue
+*/
 void test_delete_data_not_found(void){
 	queue_t q;
 	int data = 3;
@@ -152,6 +199,10 @@ void test_delete_data_not_found(void){
     TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests that you can't delete from
+	an empty queue
+*/
 void test_delete_empty_queue(void){
 	queue_t q;
 	int not_in_queue_data = 4;
@@ -161,6 +212,10 @@ void test_delete_empty_queue(void){
     TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests a simple delete from a
+	queue of length 1
+*/
 void test_delete_simple(void){
     queue_t q;
     int data = 3;
@@ -172,6 +227,11 @@ void test_delete_simple(void){
     TEST_ASSERT(queue_length(q) == 0);
 }
 
+/*
+	This tests a delete of a value
+	that is not at the head nor tail
+	of the queue
+*/
 void test_delete_middle(void){
     queue_t q;
     int data = 1;
@@ -187,6 +247,10 @@ void test_delete_middle(void){
     TEST_ASSERT(queue_length(q) == 2);
 }
 
+/*
+	This tests a delete of a value
+	at the head of a queue of length 3
+*/
 void test_delete_head(void){
     queue_t q;
     int data = 1;
@@ -202,6 +266,10 @@ void test_delete_head(void){
     TEST_ASSERT(queue_length(q) == 2);
 }
 
+/*
+	This tests a delete of a value
+	at the tail of a queue of length 3
+*/
 void test_delete_tail(void){
     queue_t q;
     int data = 1;
@@ -265,6 +333,10 @@ void test_iterator(void)
     TEST_ASSERT(ptr == &data[3]);
 }
 
+/*
+	This tests that you can't iterate
+	through a null queue
+*/
 void test_iterator_null_queue(void){
 	queue_t q;
 	fprintf(stderr, "*** TEST iterator_null_queue ***\n");
@@ -273,6 +345,10 @@ void test_iterator_null_queue(void){
 	TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests that you can't iterate
+	through a queue with a null function
+*/
 void test_iterator_null_func(void){
 	queue_t q;
 	fprintf(stderr, "*** TEST iterator_null_func ***\n");
@@ -285,6 +361,10 @@ void test_iterator_null_func(void){
 	TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests that you can't get the
+	length of a null queue
+*/
 void test_length_queue_null(void){
 	queue_t q;
 	fprintf(stderr, "*** TEST length_queue_null ***\n");
@@ -293,6 +373,10 @@ void test_length_queue_null(void){
 	TEST_ASSERT(res == -1);
 }
 
+/*
+	This tests getting the length of
+	queue, which is 3 in this case
+*/
 void test_length_success(void){
 	queue_t q;
 	int data = 1;
@@ -307,7 +391,7 @@ void test_length_success(void){
 	TEST_ASSERT(res == 3);
 }
 
-
+/* Main function that calls all the test functions*/
 int main(void)
 {
 	test_create();
