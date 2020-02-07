@@ -5,9 +5,6 @@ programs := \
 	uthread_hello.x\
 	uthread_yield.x\
 	test_preempt.x
-#	queue_tester.x \
-#	uthread_hello.x \
-#	uthread_yield.x
 
 ## *** IMPORTANT *** ##
 ##	You should NOT have to modify anything below
