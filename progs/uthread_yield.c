@@ -18,7 +18,7 @@ int thread3(void* arg)
 {
 	uthread_yield();
 	uthread_join(0, NULL); //Thread 3 tries to join with main thread
-	printf("thread3 = %d %s\n", uthread_self(), (char*)arg);
+	printf("thread3 = %d\n", uthread_self());
 	return 0;
 }
 
@@ -28,7 +28,7 @@ int thread2(void* arg)
 	uthread_yield();
 	uthread_join(uthread_self(), NULL); //Thread 2 tries to join itself
 	uthread_join(1, NULL);//Thread 2 tries to join thread 1, but it has a parent
-	printf("thread2 = %d %s\n", uthread_self(), (char*)arg);
+	printf("thread2 = %d\n", uthread_self());
 	return 0;
 }
 
@@ -36,7 +36,7 @@ int thread1(void* arg)
 {
 	uthread_create(thread2, NULL);
 	uthread_yield();
-	printf("thread1 = %d %s\n", uthread_self(), (char *)arg);
+	printf("thread1 = %d\n", uthread_self());
 	uthread_yield();
 	return 0;
 }
