@@ -20,10 +20,6 @@ all: $(lib)
 $(lib): $(objs)
 	ar rcs $@ $^
 
-%.html: %.md
-	@echo "MD   $@"    
-	$(Q)$(PANDOC) -o $@ $<
-
 clean:
 	@echo "CLEAN   $@"
-	$(Q)rm -f *.html $(objs) *.a
+	$(Q)rm -f $(objs) *.a
