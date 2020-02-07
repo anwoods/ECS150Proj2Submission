@@ -3,12 +3,12 @@
 ## High-Level Design Choices
 
 ### Queue Design Choices
-We decided to implement the queue as a linked list, to account for the necessary
-dynamic quality of the queue, and so we could easily use pointers to the first
-and last nodes in the list to make the queue FIFO.  To do this, we created
-seperate structs for the queue and for the nodes (which is where the actual data
-item is stored).  We then had to add another function to create the nodes we
-would add to the queue. Having the queue structure contain a head and a tail
+We decided to implement the queue as a linked list, to account for the necessary 
+dynamic quality of the queue, and so we could easily use pointers to the first 
+and last nodes in the list to make the queue FIFO.  To do this, we created 
+seperate structs for the queue and for the nodes (which is where the actual data 
+item is stored).  We then had to add another function to create the nodes we 
+would add to the queue. Having the queue structure contain a head and a tail 
 pointer made it easier to access the beginning of the end of the queue in O(1).
 
 ### Uthread Design Choices
