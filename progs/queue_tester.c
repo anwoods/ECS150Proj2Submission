@@ -105,12 +105,11 @@ void test_dequeue_null_queue(void){
 
 void test_dequeue_null_data(void){
 	queue_t q;
-	int *ptr = NULL;
 	int data = 3;
     fprintf(stderr, "*** TEST dequeue_null_data ***\n");
     q = queue_create();
     queue_enqueue(q, &data);
-    int res = queue_dequeue(q, (void**)&ptr);
+    int res = queue_dequeue(q, NULL);
     TEST_ASSERT(res == -1);
 }
 
