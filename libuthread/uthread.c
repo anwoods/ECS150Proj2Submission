@@ -15,7 +15,7 @@
 //structure for Thread Control Blocks
 struct tcb {
 	uthread_t tid;
-	ucontext_t ctx;
+	uthread_ctx_t ctx;
 	void * stack_ptr;
 	struct tcb * parent;
 	int retval;
@@ -63,7 +63,7 @@ static void uthread_init_library(void){
 }
 
 void uthread_yield(void)
-{	
+{
 	preempt_disable();
 	if(queue_length(ready_queue) > 0){
 		struct tcb * next_thread;
@@ -76,13 +76,13 @@ void uthread_yield(void)
 		cur_thread = next_thread;	//next_thread is now the currently now running thread
 
 		queue_iterate(zombie_queue, &uthread_match_tids, (void**)&prev_thread->tid, (void**)&temp_thread);
-		if(temp_thread == NULL){	//if prev thread not in zombie queue, check if in blocked queue
+		if(temp_thread == NULL){
+			//if prev thread not in zombie queue, check if in blocked queue
 			queue_iterate(blocked_queue, &uthread_match_tids, (void**)&prev_thread->tid, (void**)&temp_thread);
 			if(temp_thread == NULL){	//if prev thread not in blocked queue, add to ready queue
 				queue_enqueue(ready_queue, prev_thread);
 			}
 		}
-
         uthread_ctx_switch(&(prev_thread->ctx), &(cur_thread->ctx));	//switch threads
 	}
 	preempt_enable();
@@ -125,7 +125,6 @@ void uthread_exit(int retval)
 		preempt_enable();
 	}
 	preempt_disable();
-	//Id current running thread does not have a parent dont put it in the zombie queue
 	queue_enqueue(zombie_queue, cur_thread);	//add running thread to zombie queue
 	preempt_enable();
 	uthread_yield();	//yield to next ready thread
@@ -150,16 +149,12 @@ int uthread_join(uthread_t tid, int *retval)
 		preempt_disable();
 		queue_enqueue(blocked_queue, cur_thread);		//add calling thread to blocked queue
 		preempt_enable();
-
-		
 		uthread_yield();	//yield to next ready thread
 	}
 
 	preempt_disable();
 	queue_iterate(zombie_queue, &uthread_match_tids, (void**)&tid, (void**)&child_thread);	//find child in zombie queue
 	preempt_enable();
-
-
 	if(child_thread != NULL){
 		preempt_disable();
 		queue_delete(zombie_queue, child_thread);	//delete child from zombie queue
@@ -180,8 +175,12 @@ int uthread_join(uthread_t tid, int *retval)
 			queue_destroy(zombie_queue);
 		}
 		return 0;
-		
 	}
 	return -1;
-	
 }
+
+
+
+
+
+
