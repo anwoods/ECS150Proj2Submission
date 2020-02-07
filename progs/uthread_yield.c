@@ -36,7 +36,7 @@ int thread1(void* arg)
 {
 	uthread_create(thread2, NULL);
 	uthread_yield();
-	printf("thread1 = %d\n", uthread_self());
+	printf("thread1 = %d\n", uthread_self()  );
 	uthread_yield();
 	return 0;
 }
