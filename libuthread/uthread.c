@@ -44,8 +44,10 @@ static int uthread_match_tids(void * thread, void * tid_to_match){
 /* Function to initiate library of threads, called in uthread_create
    if library does not already exist. */
 static void uthread_init_library(void){
-	//initialize queues
+	//when library is created, set up preemption
 	preempt_start();
+
+	//initialize queues
 	preempt_disable();
 	ready_queue = queue_create();
 	preempt_enable();
@@ -69,7 +71,7 @@ static void uthread_init_library(void){
 
 void uthread_yield(void)
 {
-	preempt_disable();	//disable preemption so as not to interrupt yield process
+	preempt_disable();	//disable preemption so yield can perform atomically
 	if(queue_length(ready_queue) > 0){
 		struct tcb * next_thread;
 		struct tcb * prev_thread;
