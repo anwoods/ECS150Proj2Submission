@@ -92,7 +92,7 @@ int queue_enqueue(queue_t queue, void *data)
 
 int queue_dequeue(queue_t queue, void **data)
 {
-	if(queue == NULL || *data == NULL || queue->length == 0){
+	if(queue == NULL || data == NULL || queue->length == 0){
 		//cannot dequeue empty or nonexistent queue, or to location that does not exist
 		return -1;
 	}
